@@ -35,13 +35,8 @@
 <a name="listviewanimations-play-store-demo" class="anchor" href="#listviewanimations-play-store-demo"><span class="octicon octicon-link"></span></a>ListViewAnimations (<a href="https://play.google.com/store/apps/details?id=com.haarman.listviewanimations">Play Store Demo</a>)</h1>
 
 <p>ListViewAnimations is an Open Source Android library that allows developers to easily create ListViews with animations.
-Feel free to use it all you want in your Android apps provided that you cite this project and include the license in your app.</p>
-
-<p>ListViewAnimations uses the <a href="http://nineoldandroids.com/">NineOldAndroids</a> library to support devices &lt;3.0.<br>
-It also uses Roman Nurik's BETA <a href="https://gist.github.com/romannurik/2980593">SwipeDismissListViewTouchListener</a> to support swipe to dismiss.</p>
-
-<p>Version 2.0 now supports GridViews! (And other implementations of AbsListView)<br>
-It also contains an ExpandableListItemAdapter for smoothly expanding your Views!</p>
+Feel free to use it all you want in your Android apps provided that you cite this project and include the license in your app.
+A mention to haarman.niek [at] gmail.com about your app using this library is very welcome! Start your message's title with <code>[LVA]</code>.</p>
 
 <h2>
 <a name="known-applications-using-listviewanimations" class="anchor" href="#known-applications-using-listviewanimations"><span class="octicon octicon-link"></span></a>Known applications using ListViewAnimations</h2>
@@ -52,7 +47,7 @@ It also contains an ExpandableListItemAdapter for smoothly expanding your Views!
 <li>Running Coach (<a href="https://play.google.com/store/apps/details?id=com.niek.runningapp">Play Store</a>)</li>
 <li>Car Hire (<a href="https://play.google.com/store/apps/details?id=com.rentalcars.handset">Play Store</a>)</li>
 <li>Super BART (<a href="https://play.google.com/store/apps/details?id=com.getgoodcode.bart">Play Store</a>)</li>
-</ul><p>If you want your app to be listed as well please contact me via <a href="https://plus.google.com/106017817931984343451">Google Plus</a>!</p>
+</ul><p>If you want your app to be listed as well please contact me via <a href="https://plus.google.com/106017817931984343451">Google Plus</a>, or send me an email at haarman.niek [at] gmail.com, starting the title with <code>[LVA]</code>.</p>
 
 <h2>
 <a name="setup" class="anchor" href="#setup"><span class="octicon octicon-link"></span></a>Setup</h2>
@@ -64,73 +59,12 @@ It also contains an ExpandableListItemAdapter for smoothly expanding your Views!
 </ul><p>Or:</p>
 
 <ul>
-<li><a href="https://github.com/nhaarman/ListViewAnimations/blob/master/com.haarman.listviewanimations-2.2.3.jar?raw=true">Download the .jar file</a></li>
-<li>Add the .jar to your project's <code>libs</code> folder.</li>
+<li><a href="https://github.com/nhaarman/ListViewAnimations/blob/master/com.haarman.listviewanimations-2.3.0.jar?raw=true">Download the .jar file</a></li>
+<li>Add the .jar to your project's <code>libs</code> folder, or add it as an external jar to your project's build path.</li>
 </ul><h2>
 <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 
-<p>This library uses the <a href="http://en.wikipedia.org/wiki/Decorator_pattern">Decorator Pattern</a> to stack multiple <code>BaseAdapterDecorator</code>s on each other:</p>
-
-<ul>
-<li>Implement your own <code>BaseAdapter</code>, or reuse an existing one.</li>
-<li>Stack multiple <code>BaseAdapterDecorator</code>s on each other, with your <code>BaseAdapter</code> as a base.</li>
-<li>Set the <code>ListView</code> to your last <code>BaseAdapterDecorator</code>.</li>
-<li>Set your last <code>BaseAdapterDecorator</code> to the <code>ListView</code>.</li>
-</ul><h2>
-<a name="example" class="anchor" href="#example"><span class="octicon octicon-link"></span></a>Example:</h2>
-
-<pre><code>/* This example will stack two animations on top of eachother */
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-
-    MyListAdapter mAdapter = new MyListAdapter(this, getItems());
-    SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(mAdapter);
-    SwingRightInAnimationAdapter swingRightInAnimationAdapter = new SwingRightInAnimationAdapter(swingBottomInAnimationAdapter);
-
-    // Or in short notation:
-    swingRightInAnimationAdapter = 
-        new SwingRightInAnimationAdapter(
-            new SwingBottomInAnimationAdapter(
-                    new MyListAdapter(this, getItems())));
-
-    // Assign the ListView to the AnimationAdapter and vice versa
-    swingRightInAnimationAdapter.setAbsListView(getListView());
-    getListView().setAdapter(swingRightInAnimationAdapter);
-}
-
-private class MyListAdapter extends com.haarman.listviewanimations.ArrayAdapter&lt;String&gt; {
-
-    private Context mContext;
-
-    public MyListAdapter(Context context, ArrayList&lt;String&gt; items) {
-        super(items);
-        mContext = context;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        TextView tv = (TextView) convertView;
-        if (tv == null) {
-            tv = (TextView) LayoutInflater.from(mContext).inflate(R.layout.list_row, parent, false);
-        }
-        tv.setText(getItem(position));
-        return tv;
-    }
-}
-</code></pre>
-
-<h2>
-<a name="custom-animationadapters" class="anchor" href="#custom-animationadapters"><span class="octicon octicon-link"></span></a>Custom AnimationAdapters</h2>
-
-<p>Instead of using the ready-made adapters in the <code>.swinginadapters.prepared</code> package, you can also implement your own <code>AnimationAdapter</code>.
-Implement one of the following classes:</p>
-
-<ul>
-<li><code>ResourceAnimationAdapter</code></li>
-<li><code>SingleAnimationAdapter</code></li>
-<li><code>AnimationAdapter</code></li>
-</ul><p>See the examples.</p>
+<p>Please refer to the <a href="https://github.com/nhaarman/ListViewAnimations/wiki">Wiki</a> pages to learn more about how to use this library.</p>
 
 <h2>
 <a name="contribute" class="anchor" href="#contribute"><span class="octicon octicon-link"></span></a>Contribute</h2>
@@ -142,6 +76,13 @@ Implement one of the following classes:</p>
 
 <ul>
 <li>Niek Haarman</li>
+</ul><h2>
+<a name="special-thanks" class="anchor" href="#special-thanks"><span class="octicon octicon-link"></span></a>Special thanks</h2>
+
+<ul>
+<li>Roman Nurik - The ListViewAnimations library uses a modified version of his <a href="https://gist.github.com/romannurik/2980593">SwipeDismissListViewTouchListener</a> to support swipe-to-dismiss.</li>
+<li>Jake Warthon - To support devices pre-HC (&lt;3.0), a jar file of <a href="http://nineoldandroids.com/">NineOldAndroids</a> is included.</li>
+<li>Emil Sjölander - If you're already using the <a href="http://emilsjolander.github.io/StickyListHeaders/">StickyListHeaders</a> library, the ListViewAnimations library makes sure your header views are animated as well. Therefore, a copy of the StickyListHeaders jar file is included.</li>
 </ul><h2>
 <a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
 
