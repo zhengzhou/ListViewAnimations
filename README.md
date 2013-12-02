@@ -1,3 +1,4 @@
+实现类似google+一样的listView 的item进入动画
 ListViewAnimations ([Play Store Demo][1])
 ===========
 
